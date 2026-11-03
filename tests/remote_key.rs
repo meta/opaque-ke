@@ -134,8 +134,8 @@ fn triple_dh_curve25519() {
     }
 
     test::<Suite>(
-        // This should be [`Mechanism::EccMontgomeryKeyPairGen`], but SoftHSM has an incorrect
-        // implementation. See https://github.com/softhsm/SoftHSMv2/issues/647.
+        // This should be [`Mechanism::EccMontgomeryKeyPairGen`], but SoftHSM
+        // has an incorrect implementation. See https://github.com/softhsm/SoftHSMv2/issues/647.
         Mechanism::EccEdwardsKeyPairGen,
         ObjectIdentifier::new("1.3.101.110").unwrap(),
         Attribute::Derive(true),
