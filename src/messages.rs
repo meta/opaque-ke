@@ -265,7 +265,7 @@ impl<CS: CipherSuite> RegistrationResponse<CS> {
         let elem_len = EvaluationElementLen::<CS::OprfCs>::USIZE;
 
         if input.len() < elem_len {
-            return Err(ProtocolError::SerializationError);
+            return Err(voprf::Error::Deserialization.into());
         }
 
         let evaluation_element = EvaluationElement::deserialize(&input[..elem_len])?;
@@ -370,7 +370,7 @@ impl<CS: CipherSuite> CredentialRequest<CS> {
         let elem_len = BlindedElementLen::<CS::OprfCs>::USIZE;
 
         if input.len() < elem_len {
-            return Err(ProtocolError::SerializationError);
+            return Err(voprf::Error::Deserialization.into());
         }
 
         let blinded_element = BlindedElement::deserialize(&input[..elem_len])?;
@@ -429,7 +429,7 @@ impl<CS: CipherSuite> CredentialResponse<CS> {
         let elem_len = voprf::EvaluationElementLen::<CS::OprfCs>::USIZE;
 
         if input.len() < elem_len {
-            return Err(ProtocolError::SerializationError);
+            return Err(voprf::Error::Deserialization.into());
         }
 
         let evaluation_element = EvaluationElement::deserialize(&input[..elem_len])?;

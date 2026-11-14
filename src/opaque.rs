@@ -292,7 +292,7 @@ impl<CS: CipherSuite> ClientRegistration<CS> {
         let client_len = OprfClientLen::<CS::OprfCs>::USIZE;
 
         if input.len() < client_len {
-            return Err(ProtocolError::SerializationError);
+            return Err(voprf::Error::Deserialization.into());
         }
 
         let oprf_client = OprfClient::deserialize(&input[..client_len])?;
@@ -499,7 +499,7 @@ impl<CS: CipherSuite> ClientLogin<CS> {
         let client_len = OprfClientLen::<CS::OprfCs>::USIZE;
 
         if input.len() < client_len {
-            return Err(ProtocolError::SerializationError);
+            return Err(voprf::Error::Deserialization.into());
         }
 
         let oprf_client = OprfClient::deserialize(&input[..client_len])?;
