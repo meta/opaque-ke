@@ -47,6 +47,14 @@
 //! the [features](#features) section.
 //!
 //! ## Setup
+//!
+//! The examples below use `rand::rngs::SysRng`. Add Rand with the `sys_rng`
+//! feature to your `Cargo.toml` dependencies.
+//!
+//! ```toml
+//! rand = { version = "0.10", default-features = false, features = ["sys_rng"] }
+//! ```
+//!
 //! To set up the protocol, the server begins by creating a `ServerSetup`
 //! object:
 //! ```

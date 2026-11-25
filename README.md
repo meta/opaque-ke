@@ -25,6 +25,13 @@ Add the following line to the dependencies of your `Cargo.toml`:
 opaque-ke = "5.0.0-pre.0"
 ```
 
+The API examples that use `rand::rngs::SysRng` also require Rand with the
+`sys_rng` feature.
+
+```toml
+rand = { version = "0.10", default-features = false, features = ["sys_rng"] }
+```
+
 ### Minimum Supported Rust Version
 
 Rust **1.88** or higher.
@@ -39,8 +46,11 @@ Custom cipher suites and group implementations now use `digest` 0.11,
 `rand`/`rand_core` 0.10, and the corresponding RustCrypto group/signature types.
 Primitive buffers use `hybrid_array::Array`; serialized messages continue to use
 `generic_array::GenericArray`, now from version 1, to support compound lengths.
-System randomness is available through `rand::rngs::SysRng`, wrapped in
-`rand::rand_core::UnwrapErr` when an infallible generator is required.
+
+Enabling Rand's `sys_rng` feature also makes `SysRng` available through
+`opaque_ke::rand`. Wrap it in `rand::rand_core::UnwrapErr` when an infallible
+generator is required.
+
 opaque-ke no longer enables getrandom's `wasm_js` backend: users targeting
 `wasm32-unknown-unknown` in the browser who rely on system randomness must
 enable `getrandom/wasm_js` themselves.
